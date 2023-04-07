@@ -17,10 +17,9 @@ def all_species(filename):
     for line in filename:
         words = line.split("|")
         species.add(words[1])
-    print(species)
     return species
 
-all_species("villagers.csv")
+# print(all_species("villagers.csv"))
 
 def get_villagers_by_species(filename, search_string="All"):
     """Return a list of villagers' names by species.
@@ -40,12 +39,9 @@ def get_villagers_by_species(filename, search_string="All"):
     for name in filename:
         words = name.split("|")
         villagers.append([words[0], words[1]])
-     
-          
-    print(villagers)
     return sorted(villagers)
-get_villagers_by_species("villagers.csv")
-
+# print(get_villagers_by_species("villagers.csv"))
+# print("HOBBIES                                                 ")                                                                                  
 def all_names_by_hobby(filename):
     """Return a list of lists containing villagers' names, grouped by hobby.
 
@@ -61,17 +57,35 @@ def all_names_by_hobby(filename):
     fashion = []
     education = []
     music = []
-    # TODO: replace this with your code
+    # hobbies = set()
+    # villagers = []
+    # # TODO: replace this with your code
+    # filename = open(filename)
+    # for hobby in filename:
+    #     words = hobby.split("|")
+    #     hobbies.add(words[3])
+    # hobbies = list(hobbies)
+    # index = 0
+
+    # while(index < len(hobbies)):
+
+    #     for line in filename:
+    #         print(hobbies)
+    #         words = line.split("|")
+            
+    #         if (hobbies[index] == words[3]):
+    #             villagers.append[words[0]]
+    #     index+=1
     filename = open(filename)
     for hobby in filename:
         words = hobby.split("|")
-       
+
         if words[3] == "Fitness":
-            
+            print("Fitness:")
             fitness.append(words[0])
 
         elif words[3] == "Nature":
-
+            
             nature.append(words[0])
 
         elif words[3] == "Play":
@@ -86,12 +100,8 @@ def all_names_by_hobby(filename):
         elif words[3] == "Music":
             music.append(words[0])
 
-    
-
-    print([fitness, nature, play, fashion, education, music])
-   
-    return [fitness, nature, play, fashion, education, music]
-all_names_by_hobby("villagers.csv")
+    return [sorted(fitness),sorted(nature),sorted(play),sorted(fashion),sorted(education),sorted(music)]
+print(all_names_by_hobby("villagers.csv"))
 
 def all_data(filename):
     """Return all the data in a file.
@@ -116,9 +126,10 @@ def all_data(filename):
         lines = tuple(words)
         all_data.append(lines)
         
-    print(all_data)
+   
     return all_data
-all_data("villagers.csv")
+# print(all_data("villagers.csv"))
+
 def find_motto(filename, villager_name):
     """Return the villager's motto.
 
@@ -132,17 +143,17 @@ def find_motto(filename, villager_name):
     Return:
         - str: the villager's motto or None
     """
-   
+    villager_motto = None
     # TODO: replace this with your code
     filename = open(filename)
     for line in filename:
         words = line.strip().split("|")
         if(words[0] == villager_name):
-            return words[4]        
-    print(find_motto("villagers.csv"))
-    return None
+             villager_motto = words[4]        
     
-find_motto("villagers.csv", "Pudge")
+    return villager_motto
+    
+# print(find_motto("villagers.csv", "Antonio"))
 
 def find_likeminded_villagers(filename, villager_name):
     """Return a set of villagers with the same personality as the given villager.
@@ -158,16 +169,19 @@ def find_likeminded_villagers(filename, villager_name):
         find_likeminded_villagers('villagers.csv', 'Wendy')
         {'Bella', ..., 'Carmen'}
     """
-    names = set([])
+    same_personality = set()
     # TODO: replace this with your code
     filename = open(filename)
+    modelVillager_personality = None
     for line in filename:
         words = line.strip().split("|")
-      
         if(words[0] == villager_name):
-            personality = words[2]
-            while(personality):
-                names.add(words[0])
-    print(names)
-    return names
-find_likeminded_villagers("villagers.csv","Knox")
+            modelVillager_personality = words[2]
+            break
+    for line in filename:
+        words = line.strip().split("|")
+        if words[2] == modelVillager_personality:
+            same_personality.add(words[0])
+    
+    return same_personality
+# print(find_likeminded_villagers("villagers.csv","Egbert"))
